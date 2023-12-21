@@ -1,19 +1,20 @@
 #!/bin/bash
 
-# Check if pip is installed
+# Fonction pour afficher un message d'erreur et quitter en cas de problème
+function die {
+    echo "Error: $1"
+    exit 1
+}
+
+# Vérifier si pip est installé
 if ! command -v pip &> /dev/null; then
-    echo "Error: pip is not installed. Please install pip before running this script."
-    exit 1
+    die "pip is not installed. Please install pip before running this script."
 fi
 
-# Install face_recognition
-pip install face_recognition
+# Installer face_recognition et matplotlib
+echo "Installing requirements..."
+pip install face_recognition matplotlib || die "Failed to install requirements. Check your internet connection and try again."
 
-# Check if the installation was successful
-if [ $? -eq 0 ]; then
-    echo "Requirements installed successfully"
-else
-    echo "Error: Failed to install requirements. Please check your internet connection and try again."
-    exit 1
-fi
+# Afficher un message de succès
+echo "Requirements installed successfully"
 
